@@ -31,6 +31,9 @@ gem 'haml-rails'
 gem 'erb2haml', group: :development
 gem 'html2haml', group: :development
 
+# Devise for user authentication
+gem 'devise'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
