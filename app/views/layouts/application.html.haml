@@ -6,6 +6,10 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
+    - if user_signed_in?
+      = 'Signed as ' + current_user.email
+    - else
+      = link_to 'Sign in', new_user_session_path
 
     %p(class="notice")
       = notice
