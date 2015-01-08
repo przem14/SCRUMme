@@ -21,6 +21,17 @@ def sign_in(email, password)
 end
 
 feature 'Users', :type => :feature do
+
+  scenario 'User sign in' do
+    create_user
+    sign_in(EMAIL, PASSWORD)
+
+    expect(page).to have_content('Signed in successfully.')
+    expect(page).to_not have_link('Sign in')
+    expect(page).to have_content('Signed as ' + EMAIL)
+    expect(current_path).to be == root_path
+  end
+
   scenario 'User cannot sign in when not registered' do
     sign_in(EMAIL, PASSWORD)
 
@@ -35,25 +46,26 @@ feature 'Users', :type => :feature do
     expect(current_path).to be == new_user_session_path
   end
 
-  scenario 'User sign in' do
-    create_user
-    sign_in(EMAIL, PASSWORD)
-
-    expect(page).to have_content('Signed in successfully.')
-    expect(page).to_not have_content('Sign in')
-    expect(page).to have_content('Signed as ' + EMAIL)
-    expect(current_path).to be == root_path
-  end
-
   scenario 'User can sign out' do
     create_user
     sign_in(EMAIL, PASSWORD)
 
-    expect(page).to have_content('Sign out')
+    expect(page).to have_link('Sign out')
 
     click_link 'Sign out'
 
     expect(page).to have_content('Signed out successfully.')
     expect(current_path).to be == root_path
+  end
+
+  scenario 'User can edit account' do
+    create_user
+    sign_in(EMAIL, PASSWORD)
+
+    expect(page).to have_link('Edit')
+
+    click_link 'Edit'
+
+    expect(current_path).to be == edit_user_registration_path
   end
 end
