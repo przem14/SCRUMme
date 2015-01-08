@@ -13,23 +13,23 @@ def fill_sign_in_form(email, password)
   click_button 'Log in'
 end
 
+def sign_in(email, password)
+  visit root_path
+  click_link 'Sign in'
+
+  fill_sign_in_form(email, password)
+end
+
 feature 'Users', :type => :feature do
   scenario 'User cannot sign in when not registered' do
-    visit root_path
-    click_link 'Sign in'
-
-    fill_sign_in_form(EMAIL, PASSWORD)
+    sign_in(EMAIL, PASSWORD)
 
     expect(page).to have_content('Invalid email or password')
   end
 
   scenario 'Users cannot sign in when type wrong password' do
     create_user
-
-    visit root_path
-    click_link 'Sign in'
-
-    fill_sign_in_form(EMAIL, 'wrong12')
+    sign_in(EMAIL, 'wrong12')
 
     expect(page).to have_content('Invalid email or password')
     expect(current_path).to be == new_user_session_path
@@ -37,11 +37,7 @@ feature 'Users', :type => :feature do
 
   scenario 'User sign in' do
     create_user
-
-    visit root_path
-    click_link 'Sign in'
-
-    fill_sign_in_form(EMAIL, PASSWORD)
+    sign_in(EMAIL, PASSWORD)
 
     expect(page).to have_content('Signed in successfully.')
     expect(page).to_not have_content('Sign in')
@@ -51,13 +47,10 @@ feature 'Users', :type => :feature do
 
   scenario 'User can sign out' do
     create_user
-
-    visit root_path
-    click_link 'Sign in'
-
-    fill_sign_in_form(EMAIL, PASSWORD)
+    sign_in(EMAIL, PASSWORD)
 
     expect(page).to have_content('Sign out')
+
     click_link 'Sign out'
 
     expect(page).to have_content('Signed out successfully.')
