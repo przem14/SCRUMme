@@ -30,6 +30,7 @@ gem 'haml'
 gem 'haml-rails'
 gem 'erb2haml', group: :development
 gem 'html2haml', group: :development
+gem 'twitter-bootstrap-rails'
 
 # Devise for user authentication
 gem 'devise'
@@ -38,7 +39,6 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'capybara', '~> 2.4.4'
 end
-
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

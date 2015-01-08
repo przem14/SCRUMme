@@ -68,4 +68,14 @@ feature 'Users', :type => :feature do
 
     expect(current_path).to be == edit_user_registration_path
   end
+
+  scenario 'User can sign up' do
+    visit root_path
+
+    expect(page).to have_link('Sign up')
+
+    click_link('Sign up')
+
+    expect(current_path).to be == new_user_registration_path
+  end
 end
