@@ -32,6 +32,7 @@ feature 'Users', :type => :feature do
     fill_sign_in_form(EMAIL, 'wrong12')
 
     expect(page).to have_content('Invalid email or password')
+    expect(current_path).to be == new_user_session_path
   end
 
   scenario 'User sign in' do
@@ -45,5 +46,21 @@ feature 'Users', :type => :feature do
     expect(page).to have_content('Signed in successfully.')
     expect(page).to_not have_content('Sign in')
     expect(page).to have_content('Signed as ' + EMAIL)
+    expect(current_path).to be == root_path
+  end
+
+  scenario 'User can sign out' do
+    create_user
+
+    visit root_path
+    click_link 'Sign in'
+
+    fill_sign_in_form(EMAIL, PASSWORD)
+
+    expect(page).to have_content('Sign out')
+    click_link 'Sign out'
+
+    expect(page).to have_content('Signed out successfully.')
+    expect(current_path).to be == root_path
   end
 end
