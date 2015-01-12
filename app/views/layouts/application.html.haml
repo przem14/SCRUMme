@@ -6,16 +6,28 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-    - if user_signed_in?
-      = 'Signed as '
-      %b
-        = current_user.email
-      = link_to 'Edit', edit_user_registration_path
-      = link_to 'Sign out', destroy_user_session_path, :method => :delete
-    - else
-      = link_to 'Sign in', new_user_session_path
-      = link_to 'Sign up', new_user_registration_path
-
+    %nav.navbar.navbar-default
+      %div.container-fluid
+        %div.navbar-header
+          %a.navbar-brand{href: '#'} SCRUMme
+        %div.collapse.navbar-collapse.navbar-ex1-collapse
+          %ul.nav.navbar-nav.navbar-right
+            - if user_signed_in?
+              %li.dropdown
+                %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+                  %b
+                    = current_user.email
+                  %b.caret
+                %ul.dropdown-menu
+                  %li
+                    = link_to 'Edit', edit_user_registration_path
+                  %li
+                    = link_to 'Sign out', destroy_user_session_path, :method => :delete
+            - else
+              %li
+                = link_to 'Sign in', new_user_session_path
+              %li
+                = link_to 'Sign up', new_user_registration_path
     %p(class="notice")
       = notice
     %p(class="alert")

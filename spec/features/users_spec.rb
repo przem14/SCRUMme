@@ -28,7 +28,7 @@ feature 'Users', :type => :feature do
 
     expect(page).to have_content('Signed in successfully.')
     expect(page).to_not have_link('Sign in')
-    expect(page).to have_content('Signed as ' + EMAIL)
+    expect(page).to have_content(EMAIL)
     expect(current_path).to be == root_path
   end
 
