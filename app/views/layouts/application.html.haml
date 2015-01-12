@@ -11,7 +11,7 @@
     %nav.navbar.navbar-default
       %div.container-fluid
         %div.navbar-header
-          %a.navbar-brand{href: '#'} SCRUMme
+          %a.navbar-brand{href: root_path} SCRUMme
         %div.collapse.navbar-collapse.navbar-ex1-collapse
           %ul.nav.navbar-nav.navbar-right
             - if user_signed_in?
@@ -36,5 +36,4 @@
         = notice
       %p(class="alert")
         = alert
-
       = yield

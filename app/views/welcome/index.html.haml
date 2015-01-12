@@ -1,3 +1,29 @@
-%h1 Welcome#index
-%p Find me in app/views/welcome/index.html.haml
+-if !user_signed_in?
+  .jumbotron{style: "height:500px; background-color:#000; color:#FFF"}
+    %div{style: 'float:left; width:70%; height:auto;'}
+      %h1 SCRUMme
+      %p Free tool to manage your SCRUM project!
+    %div{style: 'float:left; width:30%;'}
+      = form_for(@user, url: registration_path(@user)) do |f|
+        .container
+          .row
+            .form-group
+              = f.label :email
+              = f.email_field :email, autofocus: true, class: 'form-control', style: "width:250px;"
+          .row
+            .form-group
+              = f.label :password
+              - if @validatable
+                %em
+                  (#{@minimum_password_length} characters minimum)
+              = f.password_field :password, autocomplete: "off", class: 'form-control', style: "width:250px;"
+          .row
+            .form-group
+              = f.label :password_confirmation
+              = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', style: "width:250px;"
+          .row
+            .actions
+              = f.submit 'Sign up', :class => 'btn btn-success', style: 'width: 250px'
+
+
 
