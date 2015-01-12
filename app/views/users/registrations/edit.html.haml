@@ -1,0 +1,50 @@
+%h2
+  Edit
+  = current_user.email
+= form_for(resource,
+           as: resource_name,
+           url: registration_path(resource_name),
+           html: { method: :put }) do |f|
+  = devise_error_messages!
+
+  .container
+    .row
+      .form-group
+        = f.label :email
+        = f.email_field :email, class: 'form-control', autofocus: true, style: "width:250px;"
+
+      - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+        %div
+          Currently waiting confirmation for: #{resource.unconfirmed_email}
+
+    .row
+      .form-group
+        = f.label :password
+        = f.password_field :password, class: 'form-control', autocomplete: "off", style: "width:250px;"
+
+    .row
+      .form-group
+        = f.label :password_confirmation
+        = f.password_field :password_confirmation, class: 'form-control', autocomplete: "off", style: "width:250px;"
+
+    .row
+      .form-group
+        = f.label :current_password
+        = f.password_field :current_password, class: 'form-control', autocomplete: "off", style: "width:250px;"
+
+    .row
+      .active
+        = f.submit 'Update', :class => 'btn btn-primary'
+
+%h3 Cancel my account
+= button_to "Cancel my account",
+            registration_path(resource_name),
+            data: { confirm: "Are you sure?" },
+            method: :delete,
+            class: "btn btn-primary"
+%br
+%br
+.btn.btn-default{type: "Button"}
+  = link_to "Back", :back
+%br
+%br
