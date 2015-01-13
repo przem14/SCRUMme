@@ -30,4 +30,13 @@ RSpec.describe TeamsController, :type => :controller do
     expect(controller).to redirect_to team
   end
 
+  it 'Should not create new team when give invalid params' do
+    post :create, :team => {:name => ''}
+
+    team = assigns('team')
+
+    expect(team.id).to be_nil
+    expect(controller).to render_template('new')
+    expect(Team.all).equal? []
+  end
 end
