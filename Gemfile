@@ -38,6 +38,7 @@ gem 'devise'
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'capybara', '~> 2.4.4'
+  gem 'database_cleaner', git: 'git@github.com:DatabaseCleaner/database_cleaner.git'
 end
 
 # Use ActiveModel has_secure_password

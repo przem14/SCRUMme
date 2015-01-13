@@ -1,3 +1,9 @@
+GIT
+  remote: git@github.com:DatabaseCleaner/database_cleaner.git
+  revision: 5b15b4cd90d969b4da9bb0f1ef4010bddffc5cc6
+  specs:
+    database_cleaner (1.4.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -174,6 +180,7 @@ PLATFORMS
 DEPENDENCIES
   capybara (~> 2.4.4)
   coffee-rails (~> 4.0.0)
+  database_cleaner!
   devise
   erb2haml
   haml
