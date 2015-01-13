@@ -6,6 +6,13 @@ RSpec.describe TeamsController, :type => :controller do
     expect(response).to render_template('index')
   end
 
+  it 'Should render show' do
+    team = Team.create(name: 'Team')
+
+    get :show, :id => team.id
+    expect(response).to render_template('show')
+  end
+
   it 'Should render new' do
     get :new
     expect(response).to render_template('new')
