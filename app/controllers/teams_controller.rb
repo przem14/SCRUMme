@@ -1,4 +1,6 @@
 class TeamsController < ApplicationController
+  before_action :require_login
+
   def index
   end
 
@@ -19,6 +21,13 @@ class TeamsController < ApplicationController
   end
 
 private
+  def require_login
+    unless user_signed_in?
+      flash[:alert] = "You must be logged in"
+      redirect_to new_user_session_path
+    end
+  end
+
   def team_params
     params.require(:team).permit(:name)
   end
