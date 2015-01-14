@@ -1,0 +1,20 @@
+%h1 Teams
+
+%table.table.table-striped
+  %tr
+    %th
+      Name
+
+  - @teams.each do |team|
+    %tr
+      %td
+        %p.text
+          = team.name
+      %td
+        .text-right
+          = link_to 'Show', teams_path, class: 'btn btn-info'
+          = link_to 'Edit', edit_team_path(team), class: 'btn btn-primary'
+          = link_to 'Delete', team_path(team),
+                              method: :delete,
+                              data: { confirm: 'Are you sure?' },
+                              class: 'btn btn-danger'

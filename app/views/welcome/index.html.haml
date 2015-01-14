@@ -1,9 +1,9 @@
 -if !user_signed_in?
-  .jumbotron{style: "height:500px; background-color:#000; color:#FFF"}
+  .jumbotron{style: "height:400px; background-color:#000; color:#FFF"}
     %div{style: 'float:left; width:70%; height:auto;'}
       %h1 SCRUMme
       %p Free tool to manage your SCRUM project!
-    %div{style: 'float:left; width:30%;'}
+    %div{style: 'float:right; width:30%;'}
       = form_for(@user, url: registration_path(@user)) do |f|
         .container
           .row

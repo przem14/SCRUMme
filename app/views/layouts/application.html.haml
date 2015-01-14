@@ -15,6 +15,8 @@
         %div.collapse.navbar-collapse.navbar-ex1-collapse
           %ul.nav.navbar-nav.navbar-right
             - if user_signed_in?
+              %li
+                = link_to 'Teams', teams_path
               %li.dropdown
                 %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
                   %b
@@ -32,8 +34,10 @@
                 = link_to 'Sign up', new_user_registration_path
 
     .container
-      %p(class="notice")
-        = notice
-      %p(class="alert")
-        = alert
+      - unless notice.nil?
+        %p(class="notice")
+          = notice
+      - unless alert.nil?
+        %p(class="alert")
+          = alert
       = yield
