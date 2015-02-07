@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Board:
+  = @sprint.board.team.name
+
+= link_to 'Edit', edit_sprint_path(@sprint)
+\|
+= link_to 'Back', board_path(@sprint.board)

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :sprints
+
   resources :boards
 
   devise_for :users

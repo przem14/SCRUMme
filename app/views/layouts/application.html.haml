@@ -23,7 +23,6 @@
                   - current_user.teams.each do |team|
                     %li
                       = link_to team.name + ' board', board_path(team.board)
-                  %li.divider
 
               %li.dropdown
                 %a.dropdown-toogle{"data-toggle" => "dropdown", href: "#"}

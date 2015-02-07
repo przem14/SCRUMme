@@ -2,8 +2,26 @@
 
 %p
   %b Team:
-  = @board.team
+  = @board.team.name
 
-= link_to 'Edit', edit_board_path(@board)
-\|
+%table.table.table-striped
+  %tr
+    %th Sprint
+
+  - @board.sprints.each do |sprint|
+    %tr
+      %td
+        %p.text
+          = 's' + sprint.number.to_s
+      %td
+        .text-right
+          = link_to 'Show', sprint_path(sprint.id), class: 'btn btn-info'
+          - if current_user.admin
+            = link_to 'Edit', edit_sprint_path(sprint.id), class: 'btn btn-primary'
+            = link_to 'Delete', sprint_path(sprint.id),
+                                method: :delete,
+                                data: { confirm: 'Are you sure?' },
+                                class: 'btn btn-danger'
+
+= link_to 'New sprint', sprints_path(:sprint => {:board_id => @board}), :method => :post
 = link_to 'Back', boards_path
