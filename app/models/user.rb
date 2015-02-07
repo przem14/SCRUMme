@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-  belongs_to :team
+  has_and_belongs_to_many :teams, :join_table => "users_teams",
+                                  :class_name => "Team"
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

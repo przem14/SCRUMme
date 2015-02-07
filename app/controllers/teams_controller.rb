@@ -19,8 +19,10 @@ class TeamsController < ApplicationController
 
   def create
     @team = Team.new(team_params)
+    @user = User.find(params[:team][:user_id])
+    @user.teams << @team
 
-    if @team.save()
+    if @team.save && @user.save
       redirect_to @team
     else
       render 'new'

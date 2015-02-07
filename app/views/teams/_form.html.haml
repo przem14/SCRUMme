@@ -8,6 +8,7 @@
         - @team.errors.full_messages.each do |msg|
           %li
             = msg
+  = f.hidden_field :user_id, :value => current_user.id
   .container
     .row
       .form-group

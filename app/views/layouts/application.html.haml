@@ -15,8 +15,20 @@
         %div.collapse.navbar-collapse.navbar-ex1-collapse
           %ul.nav.navbar-nav.navbar-right
             - if user_signed_in?
-              %li
-                = link_to 'Teams', teams_path
+              %li.dropdown
+                %a.dropdown-toogle{"data-toggle" => "dropdown", href: "#"}
+                  %b Teams
+                  %b.caret
+                %ul.dropdown-menu
+                  %li.dropdown-header Your teams
+                  - current_user.teams.each do |team|
+                    %li
+                      = link_to team.name, team_path(team)
+                  %li.divider
+                  %li
+                    = link_to 'Create', new_team_path
+                  %li
+                    = link_to 'Show all', teams_path
               %li.dropdown
                 %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
                   %b
