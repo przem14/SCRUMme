@@ -17,6 +17,16 @@
             - if user_signed_in?
               %li.dropdown
                 %a.dropdown-toogle{"data-toggle" => "dropdown", href: "#"}
+                  %b Boards
+                  %b.caret
+                %ul.dropdown-menu
+                  - current_user.teams.each do |team|
+                    %li
+                      = link_to team.name + ' board', board_path(team.board)
+                  %li.divider
+
+              %li.dropdown
+                %a.dropdown-toogle{"data-toggle" => "dropdown", href: "#"}
                   %b Teams
                   %b.caret
                 %ul.dropdown-menu
@@ -27,8 +37,7 @@
                   %li.divider
                   %li
                     = link_to 'Create', new_team_path
-                  %li
-                    = link_to 'Show all', teams_path
+
               %li.dropdown
                 %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
                   %b

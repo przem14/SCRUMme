@@ -1,5 +1,6 @@
 class TeamsController < ApplicationController
   before_action :require_login
+  before_action :require_admin, only: [:index]
 
   def index
     @teams = Team.all
@@ -21,6 +22,8 @@ class TeamsController < ApplicationController
     @team = Team.new(team_params)
     @user = User.find(params[:team][:user_id])
     @user.teams << @team
+
+    @team.board = Board.new
 
     if @team.save && @user.save
       redirect_to @team
@@ -47,13 +50,6 @@ class TeamsController < ApplicationController
   end
 
 private
-  def require_login
-    unless user_signed_in?
-      flash[:alert] = "You must be logged in"
-      redirect_to new_user_session_path
-    end
-  end
-
   def team_params
     params.require(:team).permit(:name)
   end
