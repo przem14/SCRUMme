@@ -1,0 +1,30 @@
+%h1
+  = 'Team ' + @team.name
+%p
+  %strong Add member
+
+= form_tag new_member_path, :method => :get do
+  .container
+    .row
+      .form-group
+        = text_field_tag :search, params[:search],
+                         placeholder: "Search users",
+                         class: 'form-control',
+                         style: "width:250px;"
+      .active
+        = submit_tag 'Search', :name => nil, :class => 'btn btn-primary'
+
+%br
+
+- unless @users.empty?
+  %p
+    %strong Choose new member
+
+= form_for @team do |f|
+  .container
+    .row
+      .form-group
+        = f.collection_select :users, @users, :id, :email,
+                              {}, {:multiple => true, :size => 12, :style => "width:250px"}
+      .active
+        = f.submit 'Add member', :class => 'btn btn-primary', :style => 'color: white;'

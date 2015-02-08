@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   resources :teams
+  get '/teams/:id/new_member', to: 'teams#new_member', as: 'new_member'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
