@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%p
+  %b Sprint:
+  = @task.sprint.number.to_s
+%p
+  %b User:
+  = @task.user.nil? ? 'Unassigned' : @task.user.email
+%p
+  %b Title:
+  = @task.title
+%p
+  %b Description:
+  = @task.description
+%p
+  %b Estimate:
+  = @task.estimate
+%p
+  %b Remaining time:
+  = @task.remaining_time
+%p
+  %b Logged time:
+  = @task.logged_time
+
+= link_to 'Edit', edit_task_path(@task)
+\|
+= link_to 'Back', sprint_path(@task.sprint)

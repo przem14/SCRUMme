@@ -1,0 +1,37 @@
+%h2
+  = 'Team ' + @sprint.board.team.name
+
+%p
+  %strong
+    = 'New task in sprint ' + @sprint.number.to_s
+
+= form_for @task do |f|
+  - if @task.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@task.errors.count, "error")} prohibited this task from being saved:"
+      %ul
+        - @task.errors.full_messages.each do |msg|
+          %li= msg
+
+  = f.hidden_field :sprint_id, :value => @sprint.id
+  .container
+    .row
+      .form_group
+        = f.label :user
+        = f.select :user_id, ([nil] + @users).map {|user| user.nil? ? ['Unassign', nil] : [user.email, user.id] }.to_h
+    .row
+      .form_group
+        = f.label :title
+        = f.text_field :title, class: 'form-control', style: "width:250px;"
+    .row
+      .form_group
+        = f.label :description
+        = f.text_area :description, class: 'form-control', style: "width:250px;"
+    .row
+      .form_group
+        = f.label :estimate
+        = f.number_field :estimate, class: 'form-control', style: "width:250px;"
+    .row
+      %br
+      .active
+        = f.submit 'Save', :class => 'btn btn-primary'

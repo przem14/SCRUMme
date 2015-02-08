@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  resources :tasks
+  get '/tasks/:id/new_in_sprint', to: 'tasks#new_in_sprint', as: 'new_task_in_sprint'
+
   resources :sprints
 
   resources :boards

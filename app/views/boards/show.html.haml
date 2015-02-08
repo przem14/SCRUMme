@@ -7,12 +7,23 @@
 %table.table.table-striped
   %tr
     %th Sprint
+    %th Progress
+    %th
 
-  - @board.sprints.each do |sprint|
+  - @board.sprints.reverse.each do |sprint|
     %tr
       %td
         %p.text
           = 's' + sprint.number.to_s
+      %td
+        .progress
+          .progress-bar.progress-bar-success{:role => "progressbar",
+                                             "aria-value" => sprint.remaining_time.to_s,
+                                             "aria-valuemin" => "0",
+                                             "aria-valuemax" => sprint.estimate.to_s,
+                                             :style => "width: #{sprint.percent_done}%"}
+            %font(color="black")
+              = sprint.remaining_time.to_s + 'h left'
       %td
         .text-right
           = link_to 'Show', sprint_path(sprint.id), class: 'btn btn-info'

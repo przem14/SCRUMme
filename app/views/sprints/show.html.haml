@@ -4,6 +4,53 @@
   %b Board:
   = @sprint.board.team.name
 
-= link_to 'Edit', edit_sprint_path(@sprint)
+
+.panel-primary
+  .panel-heading
+    = 'Tasks in sprint ' + @sprint.number.to_s
+  %table.table.table-striped
+    %tr
+      %th Title
+      %th Progress
+      %th
+      %th Time
+      %th
+
+    - @sprint.tasks.each do |task|
+      %tr
+        %td(style="width: 25%")
+          %p.text
+            = task.title
+        %td(style="width: 40%")
+          .progress
+            .progress-bar.progress-bar-success{:role => "progressbar",
+                                               "aria-value" => task.remaining_time.to_s,
+                                               "aria-valuemin" => "0",
+                                               "aria-valuemax" => task.estimate.to_s,
+                                               :style => "width: #{task.percent_done}%;"}
+              %font(color="black")
+                = task.remaining_time.to_s + 'h left'
+        %td
+        %td
+          = form_for task, url: task_path(task) do |f|
+            = f.hidden_field :title, :value => task.title
+            .row
+              .input-group
+                = number_field_tag :time, 0, class: 'form-control'
+                .input-group-btn
+                  = f.submit 'Log', class: 'btn btn-default'
+        %td
+          .text-right
+            = link_to 'Show', task_path(task.id), class: 'btn btn-info'
+            - if current_user.admin
+              = link_to 'Edit', edit_task_path(task.id), class: 'btn btn-primary'
+              = link_to 'Delete', task_path(task.id),
+                                  method: :delete,
+                                  data: { confirm: 'Are you sure?' },
+                                  class: 'btn btn-danger'
+= link_to 'Create task', new_task_in_sprint_path(@sprint)
 \|
+- if current_user.admin
+  = link_to 'Edit', edit_sprint_path(@sprint)
+  \|
 = link_to 'Back', board_path(@sprint.board)
