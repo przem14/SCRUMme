@@ -24,21 +24,21 @@ class TasksController < ApplicationController
   def new_in_sprint
     @task = Task.new
     @sprint = Sprint.find(params[:id])
-    @users = User.all
+    @users = @sprint.board.team.users
 
     respond_with(@task)
   end
 
   def edit
-    @users = User.all
     @task = Task.find(params[:id])
     @sprint = @task.sprint
+    @users = @sprint.board.team.users
   end
 
   def create
-    @users = User.all
     @task = Task.new(task_params)
     @sprint = @task.sprint
+    @users = @sprint.board.team.users
 
     @task.remaining_time = @task.estimate if @task.remaining_time.nil?
     @task.logged_time = 0
