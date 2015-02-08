@@ -30,7 +30,6 @@ gem 'haml'
 gem 'haml-rails'
 gem 'erb2haml', group: :development
 gem 'html2haml', group: :development
-gem 'twitter-bootstrap-rails'
 
 # Devise for user authentication
 gem 'devise'
