@@ -24,6 +24,17 @@
           .row
             .actions
               = f.submit 'Sign up', :class => 'btn btn-success', style: 'width: 250px'
+- else
+  - current_user.teams.each do |team|
+    %ul.list-group
+      %li.list-group-item.active
+        = team.name + ' tasks'
+      - unless team.board.sprints.nil?
+        - unless team.board.sprints.last.nil?
+          - unless team.board.sprints.last.tasks.nil?
+            - team.board.sprints.last.tasks.each do |task|
+              %li.list-group-item
+                = 'Title: ' + task.title + "\t|\tEstimate: " + task.estimate.to_s + "\t|\tRemaining time: " + task.remaining_time.to_s
 
 
 

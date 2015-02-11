@@ -9,8 +9,8 @@
   .container
     .row
       .form_group
-        = f.label :user
-        = f.select :user, ([nil] + @users).map {|user| user.nil? ? ['Unassigned', nil] : [user.email, user] }.to_h
+        = f.label :user_id
+        = f.select :user_id, ([nil] + @users).map {|user| user.nil? ? ['Unassigned', nil] : [user.email, user.id] }.to_h
     .row
       .form_group
         = f.label :title
