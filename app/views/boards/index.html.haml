@@ -9,7 +9,7 @@
 
   - @boards.each do |board|
     %tr
-      %td= board.team
+      %td= board.team.name
       %td= link_to 'Show', board
       %td= link_to 'Edit', edit_board_path(board)
       %td= link_to 'Destroy', board, :method => :delete, :data => { :confirm => 'Are you sure?' }

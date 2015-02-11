@@ -1,6 +1,6 @@
 class Sprint < ActiveRecord::Base
   belongs_to :board
-  has_many :tasks
+  has_many :tasks, dependent: :destroy
 
   def remaining_time
     sum = 0
